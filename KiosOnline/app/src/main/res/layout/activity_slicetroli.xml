@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/troligambarbarang"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        app:srcCompat="@drawable/asus_zenfone_ze620kl" />
+
+    <TextView
+        android:id="@+id/trolinamabarang"
+        android:layout_width="217dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="81dp"
+        android:layout_marginTop="11dp"
+        android:text="Nama Barang" />
+
+    <Button
+        android:id="@+id/btnDeleteBarang"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:text="X" />
+
+    <TextView
+        android:id="@+id/logo_rupiah"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/trolinamabarang"
+        android:layout_marginTop="39dp"
+        android:text="Rp" />
+
+    <TextView
+        android:id="@+id/trolihargabarang"
+        android:layout_width="179dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/logo_rupiah"
+        android:layout_centerHorizontal="true"
+        android:text="1234567890" />
+</RelativeLayout>

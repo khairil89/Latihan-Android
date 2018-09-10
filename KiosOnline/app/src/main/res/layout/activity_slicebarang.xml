@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#DEDEDE">
+
+            <ImageView
+                android:id="@+id/gambarbarang"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/logo_l"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#DEDEDE"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/namabarang"
+                    android:layout_width="196dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="11dp"
+                    android:paddingRight="11dp"
+                    android:text="Roti Unyil"
+                    android:textColor="#4588E3"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="11dp"
+                        android:text="Kategori : "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/kategoribarang"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="11dp"
+                        android:text="Makanan"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/hargabarang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="11dp"
+                    android:paddingRight="11dp"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Rp 125000,-"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnPilih"
+                android:layout_width="192dp"
+                android:layout_height="40dp"
+                android:background="#339434"
+                android:textColor="#FEFEFE"
+                android:textSize="10dp"
+                android:text="Pilih Barang" />
+
+            <Button
+                android:id="@+id/item_barang"
+                android:layout_width="192dp"
+                android:layout_height="40dp"
+                android:background="#505050"
+                android:textColor="#FEFEFE"
+                android:onClick="initNextToDetail"
+                android:text="Detail Barang"
+                android:textSize="10dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
