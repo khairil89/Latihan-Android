@@ -21,7 +21,7 @@ public class ViewDetailBarangActivity extends AppCompatActivity {
         String parseDetailNamaBarang = "";
         Integer parseDetailGambarBarang = 0;
         String parseDetailDeskripsiBarang = "";
-        String parseDetailHargaBarang = "";
+        int parseDetailHargaBarang = 0;
         String parseDetailKategoriBarang = "";
         String keyNama = "parse_detailnamabarang";
         String keyGambar = "parse_detailgambarbarang";
@@ -38,13 +38,13 @@ public class ViewDetailBarangActivity extends AppCompatActivity {
         parseDetailNamaBarang = getIntent().getExtras().getString(keyNama);
         parseDetailGambarBarang = getIntent().getIntExtra(keyGambar, 0);
         parseDetailDeskripsiBarang = getIntent().getExtras().getString(keyDeskripsi);
-        parseDetailHargaBarang = getIntent().getExtras().getString(keyHarga);
+        parseDetailHargaBarang = getIntent().getExtras().getInt(keyHarga);
         parseDetailKategoriBarang = getIntent().getExtras().getString(keyKategori);
 
         detailNama.setText(parseDetailNamaBarang);
         detailDeskripsi.setText(parseDetailDeskripsiBarang);
         detailGambar.setImageResource(parseDetailGambarBarang);
-        detailHarga.setText(parseDetailHargaBarang);
+        detailHarga.setText(parseDetailHargaBarang + "");
         detailKategori.setText(parseDetailKategoriBarang);
     }
 
