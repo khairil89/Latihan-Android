@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:background="#983554"
+                    android:background="#DD2325"
                     android:text="Hapus"
                     android:textColor="#DADADA" />
 
