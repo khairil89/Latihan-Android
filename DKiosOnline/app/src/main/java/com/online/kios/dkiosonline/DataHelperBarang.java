@@ -17,19 +17,19 @@ public class DataHelperBarang extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // TODO Auto-generated constructor sub
-        String sql = "CREATE TABLE barang (" +
+        String sql = "CREATE TABLE tbl_barang (" +
                 " id_barang integer primary key autoincrement," +
                 " nama_barang text, " +
                 " kategori_barang text, " +
                 " gambar_barang integer, " +
                 " harga_barang integer, " +
-                " status_barang text, " +)";
+                " status_barang text)";
         Log.d("Data", "onCreate: " + sql);
         db.execSQL(sql);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
-        String sql = "DROP TABLE IF EXISTS barang";
+        String sql = "DROP TABLE IF EXISTS tbl_barang";
     }
 }

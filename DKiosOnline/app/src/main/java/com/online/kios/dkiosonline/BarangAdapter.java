@@ -77,15 +77,15 @@ public class BarangAdapter extends ArrayAdapter<Barang> {
 //                    ListTroliActivity.lta.RefreshList();
                 }
                 else {
-//                    pilihbarangBtn.setText("Pilih Barang");
-//                    pilihbarangBtn.setBackgroundColor(Color.parseColor("#339434"));
-//                    pilihbarangBtn.setTextColor(Color.parseColor("#FEFEFE"));
-//                    setupBarang.stats = false;
-                    Toast.makeText(v.getContext(), "Anda sudah memilih barang ini", Toast.LENGTH_LONG).show();
-//                    SQLiteDatabase dbd = dbHelper.getReadableDatabase();
-//                    dbd.execSQL("DELETE FROM troli_barang WHERE id_barang = '" + position + "'");
-//                    Toast.makeText(v.getContext(), "Hapus dari Troli", Toast.LENGTH_LONG).show();
-//                    ListTroliActivity.lta.RefreshList();
+                    pilihbarangBtn.setText("Pilih Barang");
+                    pilihbarangBtn.setBackgroundColor(Color.parseColor("#339434"));
+                    pilihbarangBtn.setTextColor(Color.parseColor("#FEFEFE"));
+                    setupBarang.stats = false;
+//                    Toast.makeText(v.getContext(), "Anda sudah memilih barang ini", Toast.LENGTH_LONG).show();
+                    SQLiteDatabase dbd = dbHelper.getReadableDatabase();
+                    dbd.execSQL("UPDATE tbl_barang SET status_barang = 0 WHERE id_barang = '" + setupBarang.id + "'");
+                    Toast.makeText(v.getContext(), "Hapus dari Troli", Toast.LENGTH_LONG).show();
+                    ListTroliActivity.lta.RefreshList();
                 }
             }
         });
