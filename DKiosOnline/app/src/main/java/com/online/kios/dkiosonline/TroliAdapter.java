@@ -39,52 +39,47 @@ public class TroliAdapter extends ArrayAdapter<Barang> {
                     .inflate(R.layout.activity_viewparttroli, parent, false);
         }
         else {
-            Button pilihbarangBtn = convertView.findViewById(R.id.btn_hapus);;
+            Button hapusbarangBtn = convertView.findViewById(R.id.btn_hapus);;
 
-            if(barang.stats != 0) {
-                pilihbarangBtn.setText("Pilih");
-                pilihbarangBtn.setBackgroundColor(Color.parseColor("#202020"));
-                pilihbarangBtn.setTextColor(Color.parseColor("#808080"));
-            }
-            else {
-                pilihbarangBtn.setText("Kensel");
-                pilihbarangBtn.setBackgroundColor(Color.parseColor("#339434"));
-                pilihbarangBtn.setTextColor(Color.parseColor("#FEFEFE"));
-            }
+//            if(barang.stats == 1) {
+//                hapusbarangBtn.setText("Kensel");
+//                hapusbarangBtn.setBackgroundColor(Color.parseColor("#202020"));
+//                hapusbarangBtn.setTextColor(Color.parseColor("#808080"));
+//            }
+//            else {
+//                hapusbarangBtn.setText("Kensel");
+//                hapusbarangBtn.setBackgroundColor(Color.parseColor("#339434"));
+//                hapusbarangBtn.setTextColor(Color.parseColor("#FEFEFE"));
+//            }
         }
 
-        final Button pilihbarangBtn = convertView.findViewById(R.id.btn_pilih);;
+        final Button hapusbarangBtn = convertView.findViewById(R.id.btn_hapus);;
         dbHelper = new DataHelperBarang(convertView.getContext());
-        pilihbarangBtn.setTag(position);
-        pilihbarangBtn.setOnClickListener(new View.OnClickListener() {
+        hapusbarangBtn.setTag(position);
+        hapusbarangBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                remove(barang);
+                notifyDataSetChanged();
                 int position = (Integer) v.getTag();
-                Barang setupBarang = getItem(position);
+                barang.stats = 0;
+                //update status_barang menjadi = 0
+                dbHelper = new DataHelperBarang(v.getContext());
+                SQLiteDatabase dbd = dbHelper.getReadableDatabase();
 
-                if(setupBarang.stats != 1) {
-                    setupBarang.stats = 0;
+                ContentValues val = new ContentValues();
+                val.put("status_barang",barang.stats);
 
-                    //update status_barnag menjadi = 1
-                    dbHelper = new DataHelperBarang(v.getContext());
-                    SQLiteDatabase dbd = dbHelper.getReadableDatabase();
+                String[] id = { barang.idBarang + "" };
+                dbd.update(
+                        "tbl_barang",
+                        val,
+                        "id_barang = ?",
+                        id
+                );
 
-                    ContentValues val = new ContentValues();
-                    val.put("status_barang",0);
-
-                    String[] id = { setupBarang.idBarang + "" };
-                    dbd.update(
-                            "tbl_barang",
-                            val,
-                            "id_barang = ?",
-                            id
-                    );
-
-                    Toast.makeText(v.getContext(), "Hapus dari Troli", Toast.LENGTH_LONG).show();
+                Toast.makeText(v.getContext(), "Hapus dari Troli", Toast.LENGTH_LONG).show();
 //                    ListTroliActivity.lta.RefreshList();
-                }
-                else {
-                }
             }
         });
         //activity_lihatbarang merupakan xml yang menjadi tempat dimana listview berada
@@ -106,34 +101,6 @@ public class TroliAdapter extends ArrayAdapter<Barang> {
         gambarbarang.setImageResource(barang.gambarBarang);
 
         // Return the completed view to render on screen
-
-        // Lookup view for data population
-        Button detButton = convertView.findViewById(R.id.btn_detail);
-        // Cache row position inside the button using `setTag`
-        detButton.setTag(position);
-        // Attach the click event handler
-        detButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int position = (Integer) view.getTag();
-                // Access the row position here to get the correct data item
-                Barang Barang = getItem(position);
-
-                Intent intent = new Intent(getContext(), ViewDetailBarangActivity.class);
-                intent.putExtra("parse_namabarang", Barang.namaBarang);
-                intent.putExtra("parse_gambarbarang", Barang.gambarBarang);
-                intent.putExtra("parse_kategoribarang", Barang.kategoriBarang);
-                intent.putExtra("parse_hargabarang", Barang.hargaBarang);
-
-                intent.putExtra("parse_detailnamabarang", Barang.namaBarang);
-                intent.putExtra("parse_detailgambarbarang", Barang.gambarBarang);
-                intent.putExtra("parse_detaildeskripsibarang", Barang.deskripsiBarang);
-                intent.putExtra("parse_detailhargabarang", Barang.hargaBarang);
-                intent.putExtra("parse_detailkategoribarang", Barang.kategoriBarang);
-                view.getContext().startActivity(intent);
-            }
-        });
-
         return convertView;
     }
 

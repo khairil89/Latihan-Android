@@ -42,7 +42,7 @@ public class ViewListBarangActivity extends AppCompatActivity {
         Cursor cursor = dba.query(
                 "tbl_barang",
                 null,
-                "status_barang = 0",
+                null,
                 null,
                 null,
                 null,

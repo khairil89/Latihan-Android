@@ -39,8 +39,6 @@ public class BarangAdapter extends ArrayAdapter<Barang> {
         if(convertView == null) {
             convertView = LayoutInflater.from(getContext())
                     .inflate(R.layout.activity_viewpartbarang, parent, false);
-        }
-        else {
             Button pilihbarangBtn = convertView.findViewById(R.id.btn_pilih);;
 
             if(barang.stats == 0) {
@@ -50,8 +48,22 @@ public class BarangAdapter extends ArrayAdapter<Barang> {
             }
             else {
                 pilihbarangBtn.setText("Kensel");
-                pilihbarangBtn.setBackgroundColor(Color.parseColor("#339434"));
+                pilihbarangBtn.setBackgroundColor(Color.parseColor("#43AB26"));
                 pilihbarangBtn.setTextColor(Color.parseColor("#FEFEFE"));
+            }
+        }
+        else {
+            Button pilihbarangBtn = convertView.findViewById(R.id.btn_pilih);;
+
+            if(barang.stats == 0) {
+                pilihbarangBtn.setText("Pilih");
+                pilihbarangBtn.setBackgroundColor(Color.parseColor("#43AB26"));
+                pilihbarangBtn.setTextColor(Color.parseColor("#FEFEFE"));
+            }
+            else {
+                pilihbarangBtn.setText("Kensel");
+                pilihbarangBtn.setBackgroundColor(Color.parseColor("#202020"));
+                pilihbarangBtn.setTextColor(Color.parseColor("#808080"));
             }
         }
 
@@ -64,11 +76,11 @@ public class BarangAdapter extends ArrayAdapter<Barang> {
                 int position = (Integer) v.getTag();
                 Barang setupBarang = getItem(position);
 
-                if(setupBarang.stats != 1) {
-                    pilihbarangBtn.setText("Pilih");
+                if(setupBarang.stats == 0) {
+                    pilihbarangBtn.setText("Kensel");
                     pilihbarangBtn.setBackgroundColor(Color.parseColor("#202020"));
                     pilihbarangBtn.setTextColor(Color.parseColor("#808080"));
-                    setupBarang.stats = 0;
+                    setupBarang.stats = 1;
 
                     //update status_barnag menjadi = 1
                     dbHelper = new DataHelperBarang(v.getContext());
@@ -76,7 +88,7 @@ public class BarangAdapter extends ArrayAdapter<Barang> {
                     String selection = "id_barang = ?";
 
                     ContentValues val = new ContentValues();
-                    val.put("status_barang", 1);
+                    val.put("status_barang", setupBarang.stats);
 
                     String[] id = {setupBarang.idBarang + ""};
                     dbd.update(
@@ -86,19 +98,19 @@ public class BarangAdapter extends ArrayAdapter<Barang> {
                             id
                     );
 
-                    Toast.makeText(v.getContext(), "Masuk ke Troli", Toast.LENGTH_LONG).show();
+                    Toast.makeText(v.getContext(), "Masuk ke Troli", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    pilihbarangBtn.setText("Kensel");
-                    pilihbarangBtn.setBackgroundColor(Color.parseColor("#339434"));
+                    pilihbarangBtn.setText("Pilih");
+                    pilihbarangBtn.setBackgroundColor(Color.parseColor("#43AB26"));
                     pilihbarangBtn.setTextColor(Color.parseColor("#FEFEFE"));
-                    setupBarang.stats = 1;
+                    setupBarang.stats = 0;
 
                     dbHelper = new DataHelperBarang(v.getContext());
                     SQLiteDatabase dbd = dbHelper.getReadableDatabase();
 
                     ContentValues val = new ContentValues();
-                    val.put("status_barang",0);
+                    val.put("status_barang",setupBarang.stats);
 
                     String[] id = { setupBarang.idBarang + "" };
                     dbd.update(
@@ -107,6 +119,8 @@ public class BarangAdapter extends ArrayAdapter<Barang> {
                             "id_barang = ?",
                             id
                     );
+
+                    Toast.makeText(v.getContext(), "Hapus dari Troli", Toast.LENGTH_SHORT).show();
                 }
             }
         });
