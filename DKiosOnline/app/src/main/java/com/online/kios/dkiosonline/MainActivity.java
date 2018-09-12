@@ -45,12 +45,19 @@ public class MainActivity extends AppCompatActivity {
         };
 
         for (Barang items: produk) {
-            ContentValues val = insertData();
+            ContentValues val = insertData(items.idBarang, items.namaBarang, items.kategoriBarang, items.gambarBarang, items.hargaBarang, items.deskripsiBarang, items.stats);
+            db.insert("tbl_barang", null, val);
         }
     }
 
     public ContentValues insertData(int idBarang, String namaBarang, String kategoriBarang, Integer gambarBarang, int hargaBarang, String deskripsiBarang, int stats) {
-
+        ContentValues values = new ContentValues();
+        values.put("id_barang", idBarang);
+        values.put("nama_barang", namaBarang);
+        values.put("kategori_barang", kategoriBarang);
+        values.put("gambar_barang", gambarBarang);
+        values.put("harga_barang", hargaBarang);
+        values.put("status_barang", stats);
     }
 
     public void gotolistbarang(View v) {
