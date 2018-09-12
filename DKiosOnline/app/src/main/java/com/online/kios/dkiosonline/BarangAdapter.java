@@ -121,7 +121,8 @@ public class BarangAdapter extends ArrayAdapter<Barang> {
         // Populate the data into the template view using the data object
         namabarang.setText(barang.namaBarang);
         hargabarang.setText(barang.hargaBarang + "");
-        gambarbarang.setImageResource(barang.gambarBarang);
+//        gambarbarang.setImageResource(barang.gambarBarang);
+
 
         // Return the completed view to render on screen
 
