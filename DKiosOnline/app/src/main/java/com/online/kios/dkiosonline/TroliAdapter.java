@@ -7,21 +7,19 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-//import android.widget.ImageView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 
-public class BarangAdapter extends ArrayAdapter<Barang> {
+public class TroliAdapter extends ArrayAdapter<Barang> {
+
     protected Cursor cursor;
     DataHelperBarang dbHelper;
 
@@ -38,10 +36,10 @@ public class BarangAdapter extends ArrayAdapter<Barang> {
         // otherwise inflate the view
         if(convertView == null) {
             convertView = LayoutInflater.from(getContext())
-                    .inflate(R.layout.activity_viewpartbarang, parent, false);
+                    .inflate(R.layout.activity_viewparttroli, parent, false);
         }
         else {
-            Button pilihbarangBtn = convertView.findViewById(R.id.btn_pilih);;
+            Button pilihbarangBtn = convertView.findViewById(R.id.btn__hapus);;
 
             if(barang.stats != 0) {
                 pilihbarangBtn.setText("Pilih");
@@ -93,11 +91,6 @@ public class BarangAdapter extends ArrayAdapter<Barang> {
                     pilihbarangBtn.setBackgroundColor(Color.parseColor("#339434"));
                     pilihbarangBtn.setTextColor(Color.parseColor("#FEFEFE"));
                     setupBarang.stats = 0;
-//                    Toast.makeText(v.getContext(), "Anda sudah memilih barang ini", Toast.LENGTH_LONG).show();
-//                    SQLiteDatabase dbd = dbHelper.getReadableDatabase();
-//                    dbd.execSQL("UPDATE tbl_barang SET status_barang = 0 WHERE id_barang = '" + setupBarang.idBarang + "'");
-//                    Toast.makeText(v.getContext(), "Hapus dari Troli", Toast.LENGTH_LONG).show();
-//                    ListTroliActivity.lta.RefreshList();
                     dbHelper = new DataHelperBarang(v.getContext());
                     SQLiteDatabase dbd = dbHelper.getReadableDatabase();
 
@@ -163,4 +156,5 @@ public class BarangAdapter extends ArrayAdapter<Barang> {
 
         return convertView;
     }
+
 }
