@@ -1,5 +1,6 @@
 package com.online.kios.dkiosonline;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -42,6 +43,14 @@ public class MainActivity extends AppCompatActivity {
                 new Barang(19,"Kue Tart Keju", "Tart", R.drawable.kue_tart_keju, 242000, "Bagi anda yang senang dengan kue tart penuh dengan keju pilihan inilah saatnya anda mencoba",1);
                 new Barang(20,"Pizza Galau", "Roti Patisserie", R.drawable.pizza_galau, 185000, "Pizza dengan topping banyak dan meriah silahkan coba terus dan rasakan",1);
         };
+
+        for (Barang items: produk) {
+            ContentValues val = insertData();
+        }
+    }
+
+    public ContentValues insertData(int idBarang, String namaBarang, String kategoriBarang, Integer gambarBarang, int hargaBarang, String deskripsiBarang, int stats) {
+
     }
 
     public void gotolistbarang(View v) {
