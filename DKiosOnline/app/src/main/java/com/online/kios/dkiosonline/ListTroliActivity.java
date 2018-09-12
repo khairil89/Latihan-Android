@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class ListTroliActivity extends AppCompatActivity {
 
-    BarangAdapter adapter;
+    TroliAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class ListTroliActivity extends AppCompatActivity {
         ArrayList<Barang> arrayOfBarang = new ArrayList<>();
 
         // Create the adapter to convert the array to views
-        adapter = new BarangAdapter(this, arrayOfBarang);
+        adapter = new TroliAdapter(this, arrayOfBarang);
 
         // Attach the adapter to a ListView
         ListView listView = findViewById(R.id.viewtroli);

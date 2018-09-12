@@ -64,11 +64,11 @@ public class BarangAdapter extends ArrayAdapter<Barang> {
                 int position = (Integer) v.getTag();
                 Barang setupBarang = getItem(position);
 
-                if(setupBarang.stats != 0) {
+                if(setupBarang.stats != 1) {
                     pilihbarangBtn.setText("Pilih");
                     pilihbarangBtn.setBackgroundColor(Color.parseColor("#202020"));
                     pilihbarangBtn.setTextColor(Color.parseColor("#808080"));
-                    setupBarang.stats = 1;
+                    setupBarang.stats = 0;
 
                     //update status_barnag menjadi = 1
                     dbHelper = new DataHelperBarang(v.getContext());
@@ -92,7 +92,7 @@ public class BarangAdapter extends ArrayAdapter<Barang> {
                     pilihbarangBtn.setText("Kensel");
                     pilihbarangBtn.setBackgroundColor(Color.parseColor("#339434"));
                     pilihbarangBtn.setTextColor(Color.parseColor("#FEFEFE"));
-                    setupBarang.stats = 0;
+                    setupBarang.stats = 1;
 
                     dbHelper = new DataHelperBarang(v.getContext());
                     SQLiteDatabase dbd = dbHelper.getReadableDatabase();

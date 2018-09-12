@@ -49,7 +49,7 @@ public class ViewDetailBarangActivity extends AppCompatActivity {
     }
 
     public void backtoListBarang() {
-        Intent intent = new Intent(ViewDetailBarangActivity.this, ViewListBarangActivity.class);
+        Intent intent = new Intent(this, ViewListBarangActivity.class);
         startActivity(intent);
     }
 }
