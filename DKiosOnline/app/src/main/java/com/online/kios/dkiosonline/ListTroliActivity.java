@@ -30,7 +30,7 @@ public class ListTroliActivity extends AppCompatActivity {
 
     public void RefreshList() {
         SQLiteDatabase dbs = dbcenter.getReadableDatabase();
-        cursor = dbs.rawQuery("SELECT * FROM troli_barang", null);
+        cursor = dbs.rawQuery("SELECT * FROM tbl_barang WHERE status_barang = 1", null);
         daftar = new String[cursor.getCount()];
         cursor.moveToFirst();
         for( int cc=0; cc < cursor.getCount(); cc++) {

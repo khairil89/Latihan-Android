@@ -1,5 +1,6 @@
 package com.online.kios.dkiosonline;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -64,15 +65,26 @@ public class BarangAdapter extends ArrayAdapter<Barang> {
                 Barang setupBarang = getItem(position);
 
                 if(setupBarang.stats != 0) {
-                    pilihbarangBtn.setText("Terpilih");
+                    pilihbarangBtn.setText("Kensel");
                     pilihbarangBtn.setBackgroundColor(Color.parseColor("#202020"));
                     pilihbarangBtn.setTextColor(Color.parseColor("#808080"));
                     setupBarang.stats = 1;
 
-                    //insert data to troli_barang When clicked Pilih Barang
+                    //update status_barnag menjadi = 1
+                    dbHelper = new DataHelperBarang(v.getContext());
                     SQLiteDatabase dbd = dbHelper.getReadableDatabase();
-                    dbd.execSQL("UPDATE tbl_barang SET status_barang = 1 WHERE id_barang = '" + setupBarang.idBarang + "'");
-                    Toast.makeText(v.getContext(), "Hapus dari Troli", Toast.LENGTH_LONG).show();
+
+                    ContentValues val = new ContentValues();
+                    val.put("status_barang",1);
+
+                    String[] id = { setupBarang.idBarang + "" };
+                    dbd.update(
+                            "tbl_barang",
+                            val,
+                            "id_barang = ?",
+                            id
+                    );
+
                     Toast.makeText(v.getContext(), "Masuk ke Troli", Toast.LENGTH_LONG).show();
 //                    ListTroliActivity.lta.RefreshList();
                 }
@@ -82,10 +94,23 @@ public class BarangAdapter extends ArrayAdapter<Barang> {
                     pilihbarangBtn.setTextColor(Color.parseColor("#FEFEFE"));
                     setupBarang.stats = 0;
 //                    Toast.makeText(v.getContext(), "Anda sudah memilih barang ini", Toast.LENGTH_LONG).show();
+//                    SQLiteDatabase dbd = dbHelper.getReadableDatabase();
+//                    dbd.execSQL("UPDATE tbl_barang SET status_barang = 0 WHERE id_barang = '" + setupBarang.idBarang + "'");
+//                    Toast.makeText(v.getContext(), "Hapus dari Troli", Toast.LENGTH_LONG).show();
+//                    ListTroliActivity.lta.RefreshList();
+                    dbHelper = new DataHelperBarang(v.getContext());
                     SQLiteDatabase dbd = dbHelper.getReadableDatabase();
-                    dbd.execSQL("UPDATE tbl_barang SET status_barang = 0 WHERE id_barang = '" + setupBarang.idBarang + "'");
-                    Toast.makeText(v.getContext(), "Hapus dari Troli", Toast.LENGTH_LONG).show();
-                    ListTroliActivity.lta.RefreshList();
+
+                    ContentValues val = new ContentValues();
+                    val.put("status_barang",0);
+
+                    String[] id = { setupBarang.idBarang + "" };
+                    dbd.update(
+                            "tbl_barang",
+                            val,
+                            "id_barang = ?",
+                            id
+                    );
                 }
             }
         });
@@ -106,11 +131,12 @@ public class BarangAdapter extends ArrayAdapter<Barang> {
         namabarang.setText(barang.namaBarang);
         hargabarang.setText(barang.hargaBarang + "");
         gambarbarang.setImageResource(barang.gambarBarang);
+        detaildeskripsibarang.setText(barang.deskripsiBarang);
 
         // Return the completed view to render on screen
 
         // Lookup view for data population
-        Button detButton = convertView.findViewById(R.id.btn_pilih);
+        Button detButton = convertView.findViewById(R.id.btn_detail);
         // Cache row position inside the button using `setTag`
         detButton.setTag(position);
         // Attach the click event handler

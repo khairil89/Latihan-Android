@@ -23,6 +23,7 @@ public class DataHelperBarang extends SQLiteOpenHelper {
                 " kategori_barang text, " +
                 " gambar_barang integer, " +
                 " harga_barang integer, " +
+                " deskripsi_barang text, " +
                 " status_barang integer)";
         Log.d("Data", "onCreate: " + sql);
         db.execSQL(sql);
@@ -30,6 +31,7 @@ public class DataHelperBarang extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
-        String sql = "DROP TABLE IF EXISTS tbl_barang";
+//        String sql = "DROP TABLE IF EXISTS tbl_barang";
+        //TODO
     }
 }
