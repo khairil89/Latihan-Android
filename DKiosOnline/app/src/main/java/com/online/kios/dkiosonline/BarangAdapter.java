@@ -42,7 +42,7 @@ public class BarangAdapter extends ArrayAdapter<Barang> {
         else {
             Button pilihbarangBtn = convertView.findViewById(R.id.btn_pilih);;
 
-            if(barang.stats) {
+            if(barang.stats != 0) {
                 pilihbarangBtn.setText("Terpilih");
                 pilihbarangBtn.setBackgroundColor(Color.parseColor("#202020"));
                 pilihbarangBtn.setTextColor(Color.parseColor("#808080"));
@@ -63,11 +63,11 @@ public class BarangAdapter extends ArrayAdapter<Barang> {
                 int position = (Integer) v.getTag();
                 Barang setupBarang = getItem(position);
 
-                if(!setupBarang.stats) {
+                if(setupBarang.stats != 0) {
                     pilihbarangBtn.setText("Terpilih");
                     pilihbarangBtn.setBackgroundColor(Color.parseColor("#202020"));
                     pilihbarangBtn.setTextColor(Color.parseColor("#808080"));
-                    setupBarang.stats = true;
+                    setupBarang.stats = 1;
 
                     //insert data to troli_barang When clicked Pilih Barang
                     SQLiteDatabase dbi = dbHelper.getWritableDatabase();
@@ -80,10 +80,10 @@ public class BarangAdapter extends ArrayAdapter<Barang> {
                     pilihbarangBtn.setText("Pilih Barang");
                     pilihbarangBtn.setBackgroundColor(Color.parseColor("#339434"));
                     pilihbarangBtn.setTextColor(Color.parseColor("#FEFEFE"));
-                    setupBarang.stats = false;
+                    setupBarang.stats = 0;
 //                    Toast.makeText(v.getContext(), "Anda sudah memilih barang ini", Toast.LENGTH_LONG).show();
                     SQLiteDatabase dbd = dbHelper.getReadableDatabase();
-                    dbd.execSQL("UPDATE tbl_barang SET status_barang = 0 WHERE id_barang = '" + setupBarang.id + "'");
+                    dbd.execSQL("UPDATE tbl_barang SET status_barang = 0 WHERE id_barang = '" + setupBarang.idBarang + "'");
                     Toast.makeText(v.getContext(), "Hapus dari Troli", Toast.LENGTH_LONG).show();
                     ListTroliActivity.lta.RefreshList();
                 }
