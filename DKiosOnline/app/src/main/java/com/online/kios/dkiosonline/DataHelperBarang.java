@@ -23,7 +23,7 @@ public class DataHelperBarang extends SQLiteOpenHelper {
                 " kategori_barang text, " +
                 " gambar_barang integer, " +
                 " harga_barang integer, " +
-                " status_barang text)";
+                " status_barang integer)";
         Log.d("Data", "onCreate: " + sql);
         db.execSQL(sql);
     }
