@@ -77,6 +77,8 @@ public class TroliAdapter extends ArrayAdapter<Barang> {
                         "id_barang = ?",
                         id
                 );
+                dbd.close();
+                dbHelper.close();
 
                 Toast.makeText(v.getContext(), "Hapus dari Troli", Toast.LENGTH_LONG).show();
 //                    ListTroliActivity.lta.RefreshList();

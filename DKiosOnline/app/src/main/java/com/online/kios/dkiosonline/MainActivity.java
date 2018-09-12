@@ -64,7 +64,8 @@ public class MainActivity extends AppCompatActivity {
                 ContentValues val = insertData(items.idBarang, items.namaBarang, items.kategoriBarang, items.gambarBarang, items.hargaBarang, items.deskripsiBarang, items.stats);
                 db.insert("tbl_barang", null, val);
             }
-
+            db.close(); //tutup koneksi agar tidak menyampah history koneksi
+            dbhelper.close(); //tutup koneksi helper
         }
     }
 

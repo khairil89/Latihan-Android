@@ -97,6 +97,8 @@ public class BarangAdapter extends ArrayAdapter<Barang> {
                             selection,
                             id
                     );
+                    dbd.close();
+                    dbHelper.close();
 
                     Toast.makeText(v.getContext(), "Masuk ke Troli", Toast.LENGTH_SHORT).show();
                 }
@@ -119,6 +121,8 @@ public class BarangAdapter extends ArrayAdapter<Barang> {
                             "id_barang = ?",
                             id
                     );
+                    dbd.close();
+                    dbHelper.close();
 
                     Toast.makeText(v.getContext(), "Hapus dari Troli", Toast.LENGTH_SHORT).show();
                 }
