@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         values.put("kategori_barang", kategoriBarang);
         values.put("gambar_barang", gambarBarang);
         values.put("harga_barang", hargaBarang);
+        values.put("deskripsi_barang", deskripsiBarang);
         values.put("status_barang", stats);
 
         return values;

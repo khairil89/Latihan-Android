@@ -23,7 +23,7 @@ public class TroliAdapter extends ArrayAdapter<Barang> {
     protected Cursor cursor;
     DataHelperBarang dbHelper;
 
-    public BarangAdapter(Context context, ArrayList<Barang> Barang) {
+    public TroliAdapter(Context context, ArrayList<Barang> Barang) {
         super(context, 0, Barang);
     }
 
@@ -39,7 +39,7 @@ public class TroliAdapter extends ArrayAdapter<Barang> {
                     .inflate(R.layout.activity_viewparttroli, parent, false);
         }
         else {
-            Button pilihbarangBtn = convertView.findViewById(R.id.btn__hapus);;
+            Button pilihbarangBtn = convertView.findViewById(R.id.btn_hapus);;
 
             if(barang.stats != 0) {
                 pilihbarangBtn.setText("Pilih");
@@ -62,35 +62,10 @@ public class TroliAdapter extends ArrayAdapter<Barang> {
                 int position = (Integer) v.getTag();
                 Barang setupBarang = getItem(position);
 
-                if(setupBarang.stats != 0) {
-                    pilihbarangBtn.setText("Pilih");
-                    pilihbarangBtn.setBackgroundColor(Color.parseColor("#202020"));
-                    pilihbarangBtn.setTextColor(Color.parseColor("#808080"));
-                    setupBarang.stats = 1;
+                if(setupBarang.stats != 1) {
+                    setupBarang.stats = 0;
 
                     //update status_barnag menjadi = 1
-                    dbHelper = new DataHelperBarang(v.getContext());
-                    SQLiteDatabase dbd = dbHelper.getReadableDatabase();
-
-                    ContentValues val = new ContentValues();
-                    val.put("status_barang",1);
-
-                    String[] id = { setupBarang.idBarang + "" };
-                    dbd.update(
-                            "tbl_barang",
-                            val,
-                            "id_barang = ?",
-                            id
-                    );
-
-                    Toast.makeText(v.getContext(), "Masuk ke Troli", Toast.LENGTH_LONG).show();
-//                    ListTroliActivity.lta.RefreshList();
-                }
-                else {
-                    pilihbarangBtn.setText("Kensel");
-                    pilihbarangBtn.setBackgroundColor(Color.parseColor("#339434"));
-                    pilihbarangBtn.setTextColor(Color.parseColor("#FEFEFE"));
-                    setupBarang.stats = 0;
                     dbHelper = new DataHelperBarang(v.getContext());
                     SQLiteDatabase dbd = dbHelper.getReadableDatabase();
 
@@ -104,14 +79,19 @@ public class TroliAdapter extends ArrayAdapter<Barang> {
                             "id_barang = ?",
                             id
                     );
+
+                    Toast.makeText(v.getContext(), "Hapus dari Troli", Toast.LENGTH_LONG).show();
+//                    ListTroliActivity.lta.RefreshList();
+                }
+                else {
                 }
             }
         });
         //activity_lihatbarang merupakan xml yang menjadi tempat dimana listview berada
         // Lookup view for data population
-        TextView namabarang = convertView.findViewById(R.id.listNama);
-        TextView hargabarang = convertView.findViewById(R.id.listHarga);
-        ImageView gambarbarang = convertView.findViewById(R.id.listGambar);
+        TextView namabarang = convertView.findViewById(R.id.troliNama);
+        TextView hargabarang = convertView.findViewById(R.id.troliHarga);
+        ImageView gambarbarang = convertView.findViewById(R.id.troliGambar);
 
         TextView detailnamabarang = convertView.findViewById(R.id.detailNama);
         ImageView detailgambarbarang = convertView.findViewById(R.id.detailgambar);

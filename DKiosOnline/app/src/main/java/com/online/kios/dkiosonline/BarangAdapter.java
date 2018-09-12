@@ -33,7 +33,7 @@ public class BarangAdapter extends ArrayAdapter<Barang> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        final Barang barang = getItem(position); //posisi item Barang yang dipilih
+        Barang barang = getItem(position); //posisi item Barang yang dipilih
         // Check if an existing view is being reused,
         // otherwise inflate the view
         if(convertView == null) {
@@ -43,7 +43,7 @@ public class BarangAdapter extends ArrayAdapter<Barang> {
         else {
             Button pilihbarangBtn = convertView.findViewById(R.id.btn_pilih);;
 
-            if(barang.stats != 0) {
+            if(barang.stats == 0) {
                 pilihbarangBtn.setText("Pilih");
                 pilihbarangBtn.setBackgroundColor(Color.parseColor("#202020"));
                 pilihbarangBtn.setTextColor(Color.parseColor("#808080"));
@@ -73,31 +73,27 @@ public class BarangAdapter extends ArrayAdapter<Barang> {
                     //update status_barnag menjadi = 1
                     dbHelper = new DataHelperBarang(v.getContext());
                     SQLiteDatabase dbd = dbHelper.getReadableDatabase();
+                    String selection = "id_barang = ?";
 
                     ContentValues val = new ContentValues();
-                    val.put("status_barang",1);
+                    val.put("status_barang", 1);
 
-                    String[] id = { setupBarang.idBarang + "" };
+                    String[] id = {setupBarang.idBarang + ""};
                     dbd.update(
                             "tbl_barang",
                             val,
-                            "id_barang = ?",
+                            selection,
                             id
                     );
 
                     Toast.makeText(v.getContext(), "Masuk ke Troli", Toast.LENGTH_LONG).show();
-//                    ListTroliActivity.lta.RefreshList();
                 }
                 else {
                     pilihbarangBtn.setText("Kensel");
                     pilihbarangBtn.setBackgroundColor(Color.parseColor("#339434"));
                     pilihbarangBtn.setTextColor(Color.parseColor("#FEFEFE"));
                     setupBarang.stats = 0;
-//                    Toast.makeText(v.getContext(), "Anda sudah memilih barang ini", Toast.LENGTH_LONG).show();
-//                    SQLiteDatabase dbd = dbHelper.getReadableDatabase();
-//                    dbd.execSQL("UPDATE tbl_barang SET status_barang = 0 WHERE id_barang = '" + setupBarang.idBarang + "'");
-//                    Toast.makeText(v.getContext(), "Hapus dari Troli", Toast.LENGTH_LONG).show();
-//                    ListTroliActivity.lta.RefreshList();
+
                     dbHelper = new DataHelperBarang(v.getContext());
                     SQLiteDatabase dbd = dbHelper.getReadableDatabase();
 
@@ -119,13 +115,8 @@ public class BarangAdapter extends ArrayAdapter<Barang> {
         TextView namabarang = convertView.findViewById(R.id.listNama);
         TextView hargabarang = convertView.findViewById(R.id.listHarga);
         ImageView gambarbarang = convertView.findViewById(R.id.listGambar);
-
-        TextView detailnamabarang = convertView.findViewById(R.id.detailNama);
-        ImageView detailgambarbarang = convertView.findViewById(R.id.detailgambar);
         TextView deskripsibarang = convertView.findViewById(R.id.detailDeskripsi);
-        TextView detailhargabarang = convertView.findViewById(R.id.detailHarga);
-        TextView detailkategoribarang = convertView.findViewById(R.id.detailKategori);
-
+        TextView hargabarang2 = convertView.findViewById(R.id.detailHarga);
 
         // Populate the data into the template view using the data object
         namabarang.setText(barang.namaBarang);
